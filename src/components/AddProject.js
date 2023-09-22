@@ -6,9 +6,14 @@ import HeaderPage from './HeaderPage';
 import { message, Upload } from 'antd';
 import axios from 'axios';
 
-
+const URL="http://localhost:8080"
 
 const AddProject = () => {
+  const [file,setFile]=useState("");
+  const [messageApi, contextHolder] = message.useMessage();
+  const [form] = Form.useForm();
+
+
 
 
   
@@ -34,13 +39,25 @@ const AddProject = () => {
 
 // handle Form finish
 const onFinish=(data)=>{
-    debugger;
-    console.log("Form Data",data);
+  data.fileName=file;
 
+  axios.post(`${URL}/project`,data).then(result=>{
+   // console.log(result);
+    InfoMessage(result.data.message);
+    form.resetFields();
+  }).catch(err=>{
+    console.log(err);
+  })
 }
+
+const InfoMessage = (data) => {
+  messageApi.info(data);
+};
 
   return (
     <div>
+            {contextHolder}
+
               <HeaderPage/>
       
    
@@ -51,6 +68,7 @@ const onFinish=(data)=>{
       <Form
           name="basic"
 
+          form={form}
       layout={'vertical'}
       onFinish={onFinish}
 
@@ -79,7 +97,7 @@ const onFinish=(data)=>{
       </Form.Item>
 
       <Form.Item >
-        <Button type="primary">Submit</Button>
+        <Button type="primary" htmlType="submit">Submit</Button>
       </Form.Item>
 
       
