@@ -1,10 +1,11 @@
 import React from 'react';
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Link } from 'react-router-dom';
 const { Header, Content, Footer, Sider } = Layout;
-const items1 = [{name:"Home Page"}, {name:"About Page"}, {name:"Add Project Page"}].map((key) => ({
-  key,
-  label: `${key.name}`,
+const items1 = [{name:"Home Page",link:"/home",id:1}, {name:"About Page",link:"/about",id:2}, {name:"Add Project Page",link:"/addProject"},
+{name:"Signup Page",link:"/signup"}
+].map((key) => ({
+  label: <Link to={key.link}>{key.name}</Link>,
 }));
 
 const HeaderPage = () => {
@@ -18,7 +19,7 @@ const HeaderPage = () => {
         }}
       >
         <div className="demo-logo" />
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} items={items1} />
+        <Menu theme="dark" mode="horizontal"  items={items1} />
       </Header>
    
     </Layout>

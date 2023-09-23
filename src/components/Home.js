@@ -10,6 +10,7 @@ const URL="http://localhost:8080";
 const Home = () => {
   const navigate=useNavigate();
   const [projects,setProjects]=useState([]);
+  const [totalRecords,setTotalRecords]=useState(0);
 
   const [page,setPage]=useState(1);
   const [limit,setLimit]=useState(5);
@@ -21,14 +22,16 @@ const Home = () => {
   const handlePagination=(data)=>{
 
     setPage(data);
-
-  
-
-  }
+}
+const changeLimit=(size)=>{
+setLimit(size);
+}
 
   useEffect(()=>{
-    axios.get(`${URL}/project?page=${page}&limit=${limit}`).then(result=>{
-      setProjects(result.data.data);
+    const headers={ headers: {"Authorization" : localStorage.getItem("token")} }
+    axios.get(`${URL}/project?page=${page}&limit=${limit}`,headers).then(result=>{
+      setProjects(result.data.data.projects);
+      setTotalRecords(result.data.data.totalRecords);
 
     }).catch(err=>{
       console.log(err);
@@ -56,7 +59,7 @@ const Home = () => {
     
    
   </Row>
-  <Pagination defaultCurrent={1} total={50}  onChange={handlePagination} style={{marginLeft:"500px",padding:"40px"}}/>
+  <Pagination  defaultCurrent={1} total={totalRecords} pageSize={limit} onChange={handlePagination} style={{marginLeft:"500px",padding:"40px"}}/>
 
   <FooterProject/>
      

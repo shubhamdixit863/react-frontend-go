@@ -1,4 +1,4 @@
-import { Button, Checkbox, Form, Input,Row,Col } from 'antd';
+import { Button, Checkbox, Form, Input,Row,Col,message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -13,20 +13,28 @@ const tailLayout = {
 const Signin = () => {
     const [form] = Form.useForm();
     const navigate=useNavigate();
+    const [messageApi, contextHolder] = message.useMessage();
+
 
     const onFinish = (values) => {
         // We will call our api here --->
         axios.post(`${URL}/signin`,values).then(result=>{
             console.log(result.data);
+            // We will get the token saved in localStorage
+            localStorage.setItem("token",result.data.token);
             form.resetFields();
             navigate("/home");
 
         }).catch(err=>{
-            console.log(err);
+          ErrorMessage(err.response.data.message);
+          console.log(err);
         })
       };
       const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
+      };
+      const ErrorMessage = (data) => {
+        messageApi.error(data);
       };
        const onFill = () => {
 
@@ -37,7 +45,8 @@ const Signin = () => {
 
 return (
     <Row style={{marginTop:"200px"}}>
-    <Col span={8}></Col>
+      {contextHolder}
+    <Col span={7}></Col>
     <Col span={8}>
     <h1>Login Here</h1>
 
