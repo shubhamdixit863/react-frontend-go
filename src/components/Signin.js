@@ -1,6 +1,11 @@
 import { Button, Checkbox, Form, Input,Row,Col,message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Space, Spin } from 'antd';
+import { useState } from 'react';
+import HeaderPage from './HeaderPage';
+import NoAuthHeader from './NoAuthHeader';
+
 
 
 const tailLayout = {
@@ -14,19 +19,23 @@ const Signin = () => {
     const [form] = Form.useForm();
     const navigate=useNavigate();
     const [messageApi, contextHolder] = message.useMessage();
+    const [showLoader,setShowLoader]=useState(false);
 
 
     const onFinish = (values) => {
+      setShowLoader(true);
         // We will call our api here --->
         axios.post(`${URL}/signin`,values).then(result=>{
             console.log(result.data);
             // We will get the token saved in localStorage
             localStorage.setItem("token",result.data.token);
+            setShowLoader(false);
             form.resetFields();
             navigate("/home");
 
         }).catch(err=>{
           ErrorMessage(err.response.data.message);
+          setShowLoader(false);
           console.log(err);
         })
       };
@@ -44,11 +53,18 @@ const Signin = () => {
         };
 
 return (
-    <Row style={{marginTop:"200px"}}>
+  <div>
+    <NoAuthHeader/>
+
+<Row style={{marginTop:"200px"}}>
       {contextHolder}
     <Col span={7}></Col>
     <Col span={8}>
-    <h1>Login Here</h1>
+      {
+        showLoader?    <Spin size="large"  style={{marginLeft:"150px"}}/>
+:""
+      }
+    <h1 style={{marginLeft:"150px"}}>Login Here</h1>
 
     <Form
     name="basic"
@@ -124,6 +140,8 @@ return (
   </Form>
         </Col>
         </Row>
+  </div>
+
 )
 
     };

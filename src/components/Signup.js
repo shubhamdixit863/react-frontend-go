@@ -8,6 +8,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { Select, Button } from "antd";
 import { DatePicker } from "antd";
 import { useNavigate } from 'react-router-dom';
+import NoAuthHeader from "./NoAuthHeader";
 
 const { RangePicker } = DatePicker;
 const URL = "http://localhost:8080";
@@ -111,6 +112,7 @@ const Signup = () => {
   };
   return (
     <div className="App">
+      <NoAuthHeader/>
  <div style={{ marginTop: "80px",  padding:"30px"}}>
       {contextHolder}
       <Avatar size={60} icon={<UserOutlined />} />

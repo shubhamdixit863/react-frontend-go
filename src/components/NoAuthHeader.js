@@ -1,15 +1,16 @@
 import React from 'react';
-import {  Layout, Menu } from 'antd';
+import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import { Link } from 'react-router-dom';
 const { Header, Content, Footer, Sider } = Layout;
-const items1 = [{name:"Home Page",link:"/home",id:1}, {name:"About Page",link:"/about",id:2}, {name:"Add Project Page",link:"/addProject"},
-{name:"Logout",link:"/logout"},
+const items1 = [
+{name:"Signup Page",link:"/signup"},
 
+{name:"Login Page",link:"/"}
 ].map((key) => ({
   label: <Link to={key.link}>{key.name}</Link>,
 }));
 
-const HeaderPage = () => {
+const NoAuthHeader = () => {
 
   return (
     <Layout style={{padding:"10px"}}>
@@ -26,4 +27,4 @@ const HeaderPage = () => {
     </Layout>
   );
 };
-export default HeaderPage;
+export default NoAuthHeader;

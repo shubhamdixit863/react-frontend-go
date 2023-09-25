@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import FooterProject from './FooterProject';
 import { Pagination } from 'antd';
+import { Space, Spin } from 'antd';
+
 
 const URL="http://localhost:8080";
 const Home = () => {
@@ -42,24 +44,26 @@ setLimit(size);
     <div >
       <HeaderPage/>
       <Button onClick={RedirectToAddProject} type="primary" style={{width:"150px",margin:"40px"}}>Add </Button>
-
-
-      <Row gutter={16} style={{padding:"50px"}}>
+{
+  projects.length>0?<> <Row gutter={16} style={{padding:"50px"}}>
         
-        {
-          projects.map(ele=>(
-            <Col span={6}>
-      <Card title={ele.projectName} bordered={false}>
-        {ele.description}
-      </Card>
-    </Col>
+  {
+    projects.map((ele,i)=>(
+      <Col span={6}>
+<Card title={ele.projectName} bordered={false} key={i}>
+  {ele.description}
+</Card>
+</Col>
 
-          ))
-        }
-    
-   
-  </Row>
-  <Pagination  defaultCurrent={1} total={totalRecords} pageSize={limit} onChange={handlePagination} style={{marginLeft:"500px",padding:"40px"}}/>
+    ))
+  }
+
+
+</Row>
+<Pagination  defaultCurrent={1} total={totalRecords} pageSize={limit} onChange={handlePagination} style={{marginLeft:"500px",padding:"40px"}}/></>:  <Spin size="large" style={{marginTop:"200px",marginLeft:"400px", padding:"50px"}} />
+}
+
+     
 
   <FooterProject/>
      

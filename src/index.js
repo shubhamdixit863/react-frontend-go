@@ -13,6 +13,7 @@ import Home from './components/Home';
 import AddProject from './components/AddProject';
 import About from './components/About';
 import PrivateRoute from './components/PrivateRoute';
+import Logout from './components/Logout';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,12 @@ const router = createBrowserRouter([
     path: "/addProject",
     element:  <PrivateRoute>
     <AddProject />
+  </PrivateRoute>,
+  },
+  {
+    path: "/logout",
+    element:  <PrivateRoute>
+    <Logout />
   </PrivateRoute>,
   },
   {
