@@ -14,7 +14,7 @@ const tailLayout = {
       span: 16,
     },
   };
-  const URL="http://localhost:8080"
+  const URL="http://localhost:8080";
 const Signin = () => {
     const [form] = Form.useForm();
     const navigate=useNavigate();

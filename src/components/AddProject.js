@@ -6,7 +6,9 @@ import HeaderPage from './HeaderPage';
 import { message, Upload } from 'antd';
 import axios from 'axios';
 
-const URL="http://localhost:8080"
+const URL="http://localhost:8080";
+const FileUploadUrl="http://localhost:8090"
+
 
 const AddProject = () => {
   const [file,setFile]=useState("");
@@ -21,7 +23,7 @@ const AddProject = () => {
 // file Upload Here
       const props = {
         name: 'file',
-        action: 'https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188',
+        action: `${FileUploadUrl}/upload`,
         headers: {
           authorization: 'authorization-text',
         },
@@ -30,6 +32,9 @@ const AddProject = () => {
             console.log(info.file, info.fileList);
           }
           if (info.file.status === 'done') {
+            //console.log("Object-----",info);
+            setFile(info.file.response.filePath);
+          
             message.success(`${info.file.name} file uploaded successfully`);
           } else if (info.file.status === 'error') {
             message.error(`${info.file.name} file upload failed.`);
@@ -45,6 +50,7 @@ const onFinish=(data)=>{
    // console.log(result);
     InfoMessage(result.data.message);
     form.resetFields();
+    // Clear the file Uploaded section too once the form is uploaded properly
   }).catch(err=>{
     console.log(err);
   })

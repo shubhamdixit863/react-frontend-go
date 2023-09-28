@@ -6,6 +6,7 @@ import axios from 'axios';
 import FooterProject from './FooterProject';
 import { Pagination } from 'antd';
 import { Space, Spin } from 'antd';
+import { CloudDownloadOutlined } from '@ant-design/icons';
 
 
 const URL="http://localhost:8080";
@@ -24,6 +25,14 @@ const Home = () => {
   const handlePagination=(data)=>{
 
     setPage(data);
+}
+const RedirectfileUpload=(link)=>{
+
+  if(link.includes("http")){
+    window.location.href=link;
+  }
+ 
+
 }
 const changeLimit=(size)=>{
 setLimit(size);
@@ -51,7 +60,10 @@ setLimit(size);
     projects.map((ele,i)=>(
       <Col span={6}>
 <Card title={ele.projectName} bordered={false} key={i}>
-  {ele.description}
+ <p>
+ {ele.description} <br></br> <br></br>
+ <CloudDownloadOutlined onClick={()=>RedirectfileUpload(ele.fileName)} style={{ fontSize: '200%'}} />
+  </p> 
 </Card>
 </Col>
 
