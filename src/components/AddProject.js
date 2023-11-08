@@ -6,8 +6,8 @@ import HeaderPage from './HeaderPage';
 import { message, Upload } from 'antd';
 import axios from 'axios';
 
-const URL="http://localhost:8080";
-const FileUploadUrl="http://localhost:8090"
+const URL=process.env.REACT_APP_API_URL;
+const FileUploadUrl=process.env.REACT_APP_S3_URL;
 
 
 const AddProject = () => {

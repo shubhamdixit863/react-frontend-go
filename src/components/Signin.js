@@ -14,8 +14,8 @@ const tailLayout = {
       span: 16,
     },
   };
-  const URL="http://localhost:8080";
-const Signin = () => {
+  const URL=process.env.REACT_APP_API_URL;
+  const Signin = () => {
     const [form] = Form.useForm();
     const navigate=useNavigate();
     const [messageApi, contextHolder] = message.useMessage();

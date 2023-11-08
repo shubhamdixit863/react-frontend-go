@@ -19,9 +19,9 @@ start:
 
 dockerbuild:
 		@echo "building docker image"
-		cd deployment && sudo docker build -t shubhamdixit863/goreactfrontend .
+		cd deployment && sudo docker build --no-cache -t shubhamdixit863/goreactfrontend2 .
 		@echo "pushing docker image"
-		docker push shubhamdixit863/goreactfrontend
+		docker push shubhamdixit863/goreactfrontend2
 
        
       

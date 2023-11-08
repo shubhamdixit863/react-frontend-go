@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import NoAuthHeader from "./NoAuthHeader";
 
 const { RangePicker } = DatePicker;
-const URL = "http://localhost:8080";
+const URL=process.env.REACT_APP_API_URL;
 const DefaultData={
   firstName:"",
   lastName:"",

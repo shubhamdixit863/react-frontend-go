@@ -16,7 +16,7 @@ spec:
     spec:             #Specification for the pod template
       containers:     #Containers to be created in the pod
         - name: webapp-frontend          #Name of the container
-          image: shubhamdixit863/goreactfrontend  #Docker image for the container
+          image: shubhamdixit863/goreactfrontend2  #Docker image for the container
           imagePullPolicy: Always
           ports:
             - containerPort: 9090
@@ -37,10 +37,10 @@ spec:
 
   ports:
     - name: http #just a label
-      port: 9090   #internal port of the cluster in which pod is running
-      targetPort: 30082   # only be user when type is NodePort should be greater than 30000
+      port: 80   #internal port of the cluster in which pod is running
+      targetPort: 9090   # only be user when type is NodePort should be greater than 30000
 
-  type: NodePort
+  type: LoadBalancer
 
 
 
