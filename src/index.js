@@ -14,6 +14,26 @@ import AddProject from './components/AddProject';
 import About from './components/About';
 import PrivateRoute from './components/PrivateRoute';
 import Logout from './components/Logout';
+import Login from './components/admin/Login';
+import Dashboard from './components/admin/Dashboard';
+import UserDetail from './components/admin/UserDetail';
+
+const AdminRoutes=[
+  {
+    path: "/admin/login",
+    element: <Login/>,
+  },
+
+  {
+    path: "/admin/dashboard",
+    element: <Dashboard/>,
+  },
+  {
+    path: "/admin/dashboard/user/:id",
+    element: <UserDetail/>,
+  },
+
+]
 
 const router = createBrowserRouter([
   {
@@ -51,6 +71,8 @@ const router = createBrowserRouter([
   },
 
 
+
+...AdminRoutes
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

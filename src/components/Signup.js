@@ -8,7 +8,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { Select, Button } from "antd";
 import { DatePicker } from "antd";
 import { useNavigate } from 'react-router-dom';
-import NoAuthHeader from "./NoAuthHeader";
+import NoAuthHeader from "./admin/NoAuthHeader";
 
 const { RangePicker } = DatePicker;
 const URL=process.env.REACT_APP_API_URL;

@@ -1,21 +1,20 @@
+import React from 'react'
 import { Button, Checkbox, Form, Input,Row,Col,message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Space, Spin } from 'antd';
 import { useState } from 'react';
 import HeaderPage from './HeaderPage';
-import NoAuthHeader from './admin/NoAuthHeader';
-
-
-
+import NoAuthHeader from './NoAuthHeader';
 const tailLayout = {
     wrapperCol: {
       offset: 8,
       span: 16,
     },
   };
-  const URL=process.env.REACT_APP_API_URL;
-  const Signin = () => {
+
+const Login = () => {
+
     const [form] = Form.useForm();
     const navigate=useNavigate();
     const [messageApi, contextHolder] = message.useMessage();
@@ -51,9 +50,8 @@ const tailLayout = {
             navigate("/signup")
           
         };
-
-return (
-  <div>
+  return (
+    <div>
     <NoAuthHeader/>
 
 <Row style={{marginTop:"200px"}}>
@@ -64,7 +62,7 @@ return (
         showLoader?    <Spin size="large"  style={{marginLeft:"150px"}}/>
 :""
       }
-    <h1 style={{marginLeft:"150px"}}>Login Here</h1>
+    <h1 style={{marginLeft:"150px"}}>Admin Login</h1>
 
     <Form
     name="basic"
@@ -87,12 +85,12 @@ return (
 
   >
     <Form.Item
-      label="Email"
-      name="email"
+      label="Username"
+      name="username"
       rules={[
         {
           required: true,
-          message: 'Please input your Email!',
+          message: 'Please input your UserName!',
         },
       ]}
     >
@@ -112,37 +110,21 @@ return (
       <Input.Password />
     </Form.Item>
 
-    <Form.Item
-      name="remember"
-      valuePropName="checked"
-      wrapperCol={{
-        offset: 8,
-        span: 16,
-      }}
-    >
-      <Checkbox>Remember me</Checkbox>
-    </Form.Item>
+    
 
     <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
           Login
         </Button>
        
-        <Button type="primary" htmlType="button" onClick={onFill} style={{marginLeft:"5px"}}>
-         Signup Here
-        </Button>
-
-        <Button type="link" htmlType="button" onClick={onFill}>
-         Forgot  Password
-        </Button>
+       
       </Form.Item>
 
   </Form>
         </Col>
         </Row>
   </div>
+  )
+}
 
-)
-
-    };
-export default Signin;
+export default Login
